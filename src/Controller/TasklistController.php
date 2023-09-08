@@ -67,9 +67,26 @@ class TasklistController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-    #[Route('/tasklist/edit', name: 'task_edit')]
-    public function edit(): Response
+    #[Route('/tasklist/edit/{id}', name: 'task_edit')]
+    public function edit(int $id, EntityManagerInterface $entityManager, Request $request): Response
     {
-        
+        $tasklists = $entityManager->getRepository(Tasklists::class)->find($id);
+
+        if (!$tasklists) {
+            throw $this->createNotFoundException('Task not found');
+        }
+
+        $form = $this->createForm(TasklistsType::class, $tasklists);
+        $form->handleRequest($request);
+
+        if ($formisSubmitted() && $form->isValid()) {
+            $entityManager-flush();
+
+            return $this->redirectToRoute('task_list');
+        }
+
+        return $this->render('tasklist/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

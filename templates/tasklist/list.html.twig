@@ -1,5 +1,9 @@
 {# templates/tasklist/list.html.twig #}
 
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
 <h1>Task Liste</h1>
 
 <ul>
@@ -7,8 +11,10 @@
         <li>
         {{ tasks.title }}
         <a href="{{ path('task_delete', {'id': tasks.id}) }}" class="btn btn-danger">Delete</a>
+        <a href="{{ path('task_edit', {'id': task.id}) }}">Edit</a>
         </li>
     {% endfor %}
 </ul>
 
 <a href="{{ path('task_create') }}" class="btn btn-success">Create Task</a>
+{% endblock %}
