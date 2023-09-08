@@ -1,0 +1,9 @@
+{# templates/tasklist/list.html.twig #}
+
+<h1>Task Liste</h1>
+
+<ul>
+    {% for task in tasks %}
+        <li>{{ task.title }}</li>
+    {% endfor %}
+</ul>

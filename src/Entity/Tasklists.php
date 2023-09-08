@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
+use App\Repository\TasklistsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TaskRepository::class)]
-class Task
+#[ORM\Entity(repositoryClass: TasklistsRepository::class)]
+class Tasklists
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
