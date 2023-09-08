@@ -80,7 +80,7 @@ class TasklistController extends AbstractController
         $form->handleRequest($request);
 
         if ($formisSubmitted() && $form->isValid()) {
-            $entityManager-flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('task_list');
         }
