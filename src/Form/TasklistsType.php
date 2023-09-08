@@ -23,7 +23,7 @@ class TasklistsType extends AbstractType
             ])
             ->add('dueDate', DateType::class, [
                 'label' => 'Date',
-                'widget' => 'single-text',
+                'widget' => 'single_text',
                 'html5' => true,
             ]);
         ;
