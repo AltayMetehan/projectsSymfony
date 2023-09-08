@@ -11,7 +11,7 @@
         <li>
         {{ tasks.title }}
         <a href="{{ path('task_delete', {'id': tasks.id}) }}" class="btn btn-danger">Delete</a>
-        <a href="{{ path('task_edit', {'id': task.id}) }}">Edit</a>
+        <a href="{{ path('task_edit', {'id': tasks.id}) }}">Edit</a>
         </li>
     {% endfor %}
 </ul>
