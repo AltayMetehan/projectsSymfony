@@ -7,16 +7,16 @@ controllers:
 
     task_list:
         path: /tasklist
-        controller: App\Controller\TaskController::list
+        controller: App\Controller\TasklistController::list
 
     #task_create:
     #   path: /tasks/create
-    #   controller: App\Controller\TaskController::create
+    #   controller: App\Controller\TasklistController::create
 
     #task_edit:
     #   path: /tasks/edit/{id}
-    #   controller: App\Controller\TaskController::edit
+    #   controller: App\Controller\TasklistController::edit
 
     #task_delete:
     #   path: /tasks/delete/{id}
-    #   controller: App\Controller\TaskController::delete
+    #   controller: App\Controller\TasklistController::delete
