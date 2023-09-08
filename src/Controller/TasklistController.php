@@ -9,10 +9,17 @@ use App\Entity\Tasklists;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\TasklistsType;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class TasklistController extends AbstractController
 {
+    private $doctrine;
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+
     #[Route('/tasklist', name: 'task_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
@@ -45,10 +52,19 @@ class TasklistController extends AbstractController
         ]);
     }
 
-    #[Route('/tasklist/delete', name: 'task_delete')]
-    public function delete(): Response
+    #[Route('/tasklist/delete/{id}', name: 'task_delete')]
+    public function delete(int $id, EntityManagerInterface $entityManager): Response
     {
-        
+        $tasklists = $entityManager->getRepository(Tasklists::class)->find($id);
+
+        if (!$tasklists) {
+            throw $this->createNotFoundException('Task not found');
+        }
+
+        $entityManager->remove($tasklists);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('task_list');
     }
 
     #[Route('/tasklist/edit', name: 'task_edit')]

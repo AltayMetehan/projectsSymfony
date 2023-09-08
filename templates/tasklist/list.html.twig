@@ -4,7 +4,10 @@
 
 <ul>
     {% for tasks in tasklists %}
-        <li>{{ tasks.title }}</li>
+        <li>
+        {{ tasks.title }}
+        <a href="{{ path('task_delete', {'id': tasks.id}) }}" class="btn btn-danger">Delete</a>
+        </li>
     {% endfor %}
 </ul>
 
