@@ -79,7 +79,7 @@ class TasklistController extends AbstractController
         $form = $this->createForm(TasklistsType::class, $tasklists);
         $form->handleRequest($request);
 
-        if ($formIsSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
             return $this->redirectToRoute('task_list');
