@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Tasklists;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\TasklistsType;
 
 
 class TasklistController extends AbstractController
@@ -23,9 +25,24 @@ class TasklistController extends AbstractController
     }
 
     #[Route('/tasklist/create', name: 'task_create')]
-    public function create(): Response
+    public function create(Request $request): Response
     {
-        
+        $tasklists = new Tasklists();
+
+        $form = $this->createForm(TasklistsType::class, $tasklists);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->doctrine->getManager();
+            $entityManager->persist($tasklists);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('task_list');
+        }
+
+        return $this->render('tasklist/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/tasklist/delete', name: 'task_delete')]
