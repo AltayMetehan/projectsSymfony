@@ -4,19 +4,18 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+task_list:
+  path: /tasklist
+  controller: App\Controller\TasklistController::list
 
-    task_list:
-        path: /tasklist
-        controller: App\Controller\TasklistController::list
+task_create:
+  path: /tasks/create
+  controller: App\Controller\TasklistController::create
 
-    #task_create:
-    #   path: /tasks/create
-    #   controller: App\Controller\TasklistController::create
+task_edit:
+   path: /tasks/edit/{id}
+   controller: App\Controller\TasklistController::edit
 
-    #task_edit:
-    #   path: /tasks/edit/{id}
-    #   controller: App\Controller\TasklistController::edit
-
-    #task_delete:
-    #   path: /tasks/delete/{id}
-    #   controller: App\Controller\TasklistController::delete
+task_delete:
+   path: /tasks/delete/{id}
+   controller: App\Controller\TasklistController::delete

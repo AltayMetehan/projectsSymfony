@@ -5,18 +5,21 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Tasklists;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class TasklistController extends AbstractController
 {
     #[Route('/tasklist', name: 'task_list')]
-    public function list(): Response
+    public function list(EntityManagerInterface $entityManager): Response
     {
-        /**$tasks = $this->getDoctrine()->getRepository(Task::class)->findAll();
+        $repository = $entityManager->getRepository(Tasklists::class);
+        $tasklists = $repository->findAll();
 
-        return $this->render('task/list.html.twig', [
-            'tasks' => $tasks,
-        ]);*/
+        return $this->render('tasklist/list.html.twig', [
+            'tasklists' => $tasklists,
+        ]);
     }
 
     #[Route('/tasklist/create', name: 'task_create')]
